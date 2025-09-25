@@ -1,0 +1,278 @@
+<odoo>
+  <template id="report_factura_toyota_copia_template">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+        <meta charset="utf-8"/>
+
+        <!-- ENCABEZADO -->
+        <div class="header" style="position: running(header);">
+          <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse; border-color: transparent;">
+            <tr>
+              <!-- COLUMNA 1: LOGO Y TEXTO (30%) -->
+              <td style="width: 30%; vertical-align: top; padding: 5px;">
+                <div style="text-align: center;">
+                  <img t-att-src="'/web/image?model=res.company&amp;id=%s&amp;field=logo' % doc.company_id.id" style="max-height: 70px; max-width: 180px;"/>
+                  <div style="color: black; font-size: 14px; margin-top: 5px;">
+                    Concesionario Toyota, C.A.
+                  </div>
+                </div>
+              </td>
+
+              <!-- COLUMNA 2: ESPACIO EN BLANCO (30%) -->
+              <td style="width: 30%; vertical-align: top; padding: 5px;">
+                <!-- Espacio en blanco -->
+              </td>
+
+              <!-- COLUMNA 3: INFORMACIÓN DE FACTURA (30%) -->
+              <td style="width: 30%; vertical-align: middle; padding: 5px;">
+                <table style="width: 100%; border-collapse: collapse; border: none; border-color: transparent;">
+                  <!-- FILA 1: TÍTULO FACTURA (ocupa 2 columnas) -->
+                  <tr>
+                    <td colspan="2" style="text-align: center; color: #CC2229; font-size: 20px; font-weight: bold; padding-bottom: 10px; border: none;">
+                      Factura
+                    </td>
+                  </tr>
+
+                  <!-- FILA 2: FACTURA N° -->
+                  <tr>
+                    <td style="font-weight: bold; padding: 2px 5px; vertical-align: top; border: none;">Factura N°:</td>
+                    <td style="padding: 2px 5px; vertical-align: top; border: none;" t-esc="doc.name"/>
+                  </tr>
+
+                  <!-- FILA 3: FECHA DE EMISIÓN -->
+                  <tr>
+                    <td style="font-weight: bold; padding: 2px 5px; vertical-align: top; border: none;">Fecha de Emisión:</td>
+                    <td style="padding: 2px 5px; vertical-align: top; border: none;">
+                      <span t-esc="doc.invoice_date"/>
+                    </td>
+                  </tr>
+
+                  <!-- FILA 4: FECHA DE VENCIMIENTO -->
+                  <tr>
+                    <td style="font-weight: bold; padding: 2px 5px; vertical-align: top; border: none;">Fecha de Vencimiento:</td>
+                    <td style="padding: 2px 5px; vertical-align: top; border: none;">
+                      <span t-esc="doc.invoice_date_due"/>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="page copia">
+          <!-- TABLA DE INFORMACIÓN DE PAGO Y FACTURACIÓN -->
+          <!-- TABLA DE INFORMACIÓN DE PAGO Y FACTURACIÓN -->
+          <table style="width: 100%; border-collapse: collapse; margin: 10px 0; border-spacing: 0;">
+            <!-- FILA 1: TÍTULOS PRINCIPALES -->
+            <tr>
+              <!-- COLUMNA 1-2: TÍTULO "INFORMACIÓN DE PAGO" -->
+              <td colspan="2" style="text-align: center; color: #808183; font-size: 16px; font-weight: bold; padding: 3px; border: none; background-color: #f9f9f9;">
+            Información de Pago
+              </td>
+              <!-- COLUMNA 3-4: TÍTULO "FACTURAR A:" -->
+              <td colspan="2" style="text-align: center; color: #808183; font-size: 16px; font-weight: bold; padding: 3px; border: none; background-color: #f9f9f9;">
+            Facturar a:
+              </td>
+            </tr>
+
+            <!-- FILA 2: CUENTA BANCARIA Y CLIENTE -->
+            <tr>
+              <!-- COLUMNA 1: TÍTULO CUENTA -->
+              <td style="font-weight: bold; padding: 2px 4px; border: none; text-align: left; width: 15%; vertical-align: top;">Cuenta:</td>
+              <!-- COLUMNA 2: NÚMERO DE CUENTA -->
+              <td style="padding: 2px 4px; border: none; text-align: left; font-size: 11px; width: 35%; vertical-align: top;">0101-0101-0101-0101-0101</td>
+              <!-- COLUMNA 3: TÍTULO CLIENTE -->
+              <td style="font-weight: bold; padding: 2px 4px; border: none; text-align: left; width: 15%; vertical-align: top;">Cliente:</td>
+              <!-- COLUMNA 4: NOMBRE DEL CLIENTE -->
+              <td style="padding: 2px 4px; border: none; text-align: left; font-size: 11px; width: 35%; vertical-align: top;" t-esc="doc.partner_id.name or ''"/>
+            </tr>
+
+            <!-- FILA 3: NOMBRE DE LA CUENTA Y DIRECCIÓN -->
+            <tr>
+              <!-- COLUMNA 1: TÍTULO A NOMBRE DE -->
+              <td style="font-weight: bold; padding: 2px 4px; border: none; text-align: left; vertical-align: top;">A nombre de:</td>
+              <!-- COLUMNA 2: NOMBRE DEL TITULAR -->
+              <td style="padding: 2px 4px; border: none; text-align: left; font-size: 11px; vertical-align: top;">Concesionario Toyota, C.A.</td>
+              <!-- COLUMNA 3: TÍTULO DIRECCIÓN -->
+              <td style="font-weight: bold; padding: 2px 4px; border: none; text-align: left; vertical-align: top;">Dirección:</td>
+              <!-- COLUMNA 4: DIRECCIÓN DEL CLIENTE -->
+              <td style="padding: 2px 4px; border: none; text-align: left; font-size: 11px; vertical-align: top;" t-esc="doc.partner_id.contact_address_complete or doc.partner_id.street or ''"/>
+            </tr>
+
+            <!-- FILA 4: BANCO Y EMAIL -->
+            <tr>
+              <!-- COLUMNA 1: TÍTULO BANCO -->
+              <td style="font-weight: bold; padding: 2px 4px; border: none; text-align: left; vertical-align: top;">Banco:</td>
+              <!-- COLUMNA 2: NOMBRE DEL BANCO -->
+              <td style="padding: 2px 4px; border: none; text-align: left; font-size: 11px; vertical-align: top;">Banco Venezolano de Credito</td>
+              <!-- COLUMNA 3: TÍTULO EMAIL -->
+              <td style="font-weight: bold; padding: 2px 4px; border: none; text-align: left; vertical-align: top;">Email:</td>
+              <!-- COLUMNA 4: EMAIL DEL CLIENTE -->
+              <td style="padding: 2px 4px; border: none; text-align: left; font-size: 11px; vertical-align: top;" t-esc="doc.partner_id.email or ''"/>
+            </tr>
+          </table>
+          <!-- Tabla las líneas de la factura -->
+          <table class="invoice_lines" width="100%" style="border: 2px solid #CC2229; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid #CC2229; background-color: #CC2229; color: white; font-weight: bold; padding: 10px; text-align: center;">Descripción</th>
+                <th style="border: 1px solid #CC2229; background-color: #CC2229; color: white; font-weight: bold; padding: 10px; text-align: center;">Cantidad</th>
+                <th style="border: 1px solid #CC2229; background-color: #CC2229; color: white; font-weight: bold; padding: 10px; text-align: center;">Precio Unitario</th>
+                <th style="border: 1px solid #CC2229; background-color: #CC2229; color: white; font-weight: bold; padding: 10px; text-align: center;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="doc.invoice_line_ids" t-as="line">
+                <tr>
+                  <!-- Columna 1: Nombre del producto / descripción -->
+                  <td style="border-left: 1px solid #CC2229; border-right: 1px solid #808183; border-top: 1px solid #808183; border-bottom: 1px solid #808183; padding: 8px; text-align: left;">
+                    <span t-field="line.product_id.name"/>
+                  </td>
+                  <!-- Columna 2: Cantidad, formateada como entero sin decimales -->
+                  <td style="border-left: 1px solid #808183; border-right: 1px solid #808183; border-top: 1px solid #808183; border-bottom: 1px solid #808183; padding: 8px; text-align: center;">
+                    <span t-field="line.quantity" t-options='{"widget": "float", "precision": 0}'/>
+                  </td>
+                  <!-- Columna 3: Precio unitario -->
+                  <td style="border-left: 1px solid #808183; border-right: 1px solid #808183; border-top: 1px solid #808183; border-bottom: 1px solid #808183; padding: 8px; text-align: right;">
+                    <span t-field="line.price_unit"/>
+                  </td>
+                  <!-- Columna 4: Precio subtotal -->
+                  <td style="border-left: 1px solid #808183; border-right: 1px solid #CC2229; border-top: 1px solid #808183; border-bottom: 1px solid #808183; padding: 8px; text-align: right;">
+                    <span t-field="line.price_subtotal"/>
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+          <div style="position: fixed; top: 63%; left: 0; width: 100%; font-size: 8px;">
+            <!-- TABLA DE TÉRMINOS Y CONDICIONES Y TOTALES -->
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; border-spacing: 0;">
+              <tr>
+                <!-- COLUMNA 1: TÉRMINOS Y CONDICIONES (60%) -->
+                <td style="width: 60%; vertical-align: top; padding: 5px; border: none;">
+                  <!-- FILA 1: TÍTULO -->
+                  <div style="color: #CC2229; font-size: 15px; font-weight: bold; text-align: left; margin-bottom: 5px;">
+                Términos y condiciones
+                  </div>
+                  <!-- FILA 2: CONDICIONES DE PAGO -->
+                  <div style="color: #808183; text-align: left; font-size: 11px;">
+                    <span t-esc="doc.invoice_payment_term_id.name or ''"/>
+                  </div>
+                </td>
+
+                <!-- COLUMNA 2: TÍTULOS (20%) -->
+                <td style="width: 20%; vertical-align: top; padding: 5px; border: none;">
+                  <!-- FILA 1: ESPACIO VACÍO PARA ALINEACIÓN -->
+                  <div style="height: 20px; margin-bottom: 5px;"></div>
+                  <!-- FILA 2: SUB TOTAL -->
+                  <div style="font-weight: bold; text-align: left; color: black; margin-bottom: 5px;">Sub Total:</div>
+                  <!-- FILA 3: IMPUESTO IVA -->
+                  <div style="font-weight: bold; text-align: left; color: black; margin-bottom: 5px;">Impuesto IVA:</div>
+                  <!-- FILA 4: TOTAL -->
+                  <div style="font-weight: bold; text-align: left; color: black;">Total:</div>
+                </td>
+
+                <!-- COLUMNA 3: VALORES (20%) -->
+                <td style="width: 20%; vertical-align: top; padding: 5px; border: none;">
+                  <!-- FILA 1: ESPACIO VACÍO PARA ALINEACIÓN -->
+                  <div style="height: 20px; margin-bottom: 5px;"></div>
+                  <!-- FILA 2: SUB TOTAL -->
+                  <div style="text-align: right; margin-bottom: 5px;" t-esc="doc.amount_untaxed"/>
+                  <!-- FILA 3: IMPUESTO IVA -->
+                  <div style="text-align: right; margin-bottom: 5px;" t-esc="doc.amount_tax"/>
+                  <!-- FILA 4: TOTAL -->
+                  <div style="text-align: right; font-weight: bold;" t-esc="doc.amount_total"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- PIE DE PÁGINA - 2 COLUMNAS -->
+        <footer style="position: fixed; bottom: 30mm; width: 100%; background: white; padding: 10px 0;">
+          <!-- TRIPLE LÍNEA DE COLORES -->
+          <div style="width: 100%; margin: 0 auto 8px auto; display: block;">
+            <div style="width: 100%; height: 2px; background: #CC2229; margin: 2px 0; display: block;"></div>
+            <div style="width: 100%; height: 2px; background: #808183; margin: 2px 0; display: block;"></div>
+            <div style="width: 100%; height: 2px; background: #CC2229; margin: 2px 0; display: block;"></div>
+          </div>
+
+          <!-- CONTENEDOR DE 2 COLUMNAS -->
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <!-- COLUMNA 1: INFORMACIÓN DE CONTACTO -->
+              <td style="width: 50%; vertical-align: top; padding: 5px;">
+                <table style="border-collapse: collapse; border: none;">
+                  <tr>
+                    <td style="vertical-align: top; padding: 2px 5px; font-weight: bold; border: none;">Teléfonos:</td>
+                    <td style="vertical-align: top; padding: 2px 5px; border: none;" t-esc="doc.company_id.phone or ''"/>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top; padding: 2px 5px; font-weight: bold; border: none;">Email:</td>
+                    <td style="vertical-align: top; padding: 2px 5px; border: none;" t-esc="doc.company_id.email or ''"/>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top; padding: 2px 5px; font-weight: bold; border: none;">Dirección:</td>
+                    <td style="vertical-align: top; padding: 2px 5px; border: none;" t-esc="doc.company_id.street or ''"/>
+                  </tr>
+                </table>
+              </td>
+
+              <!-- COLUMNA 2: TEXTO TOYOTA -->
+              <td style="width: 50%; vertical-align: middle; padding: 5px;">
+                <div style="color: #CC2229; font-size: 14px; font-weight: bold; text-align: center;">
+                  Gracias por preferir Toyota, su mejor opción en vehículos.
+                </div>
+              </td>
+            </tr>
+          </table>
+        </footer>
+        <!-- Texto fijo al final de la página -->
+        <div class="texto_fijo" style="position: fixed; bottom: 17mm; width: 100%; text-align: center; font-weight: bold; color: #808183; font-size: 12px; z-index: 10;">
+          COPIA SIN DERECHO A CREDITO FISCAL
+        </div>
+
+        <!-- ESTILOS CSS -->
+        <style>
+          @page {
+            margin-top: 100px;
+            margin-bottom: 80px;
+            @top-center {
+              content: element(header);
+            }
+          }
+          
+          .header {
+            position: element(header);
+            top: -100px;
+            width: 100%;
+          }
+          
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+          }
+          
+          /* Asegurar que todos los elementos block ocupen el 100% */ div[style*="width: 100%"] {
+            display: block !important;
+            box-sizing: border-box;
+          }
+          div.texto_fijo {
+            position: fixed;
+            bottom: 20mm; /* Lo bajamos para separarlo del footer */
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: #808183;
+            font-size: 12px;
+            z-index: 10;
+        }
+        </style>
+
+      </t>
+    </t>
+  </template>
+</odoo>

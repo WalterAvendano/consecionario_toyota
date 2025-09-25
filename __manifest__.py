@@ -13,6 +13,8 @@
     'data': [
         'reports/factura_toyota_reporte.xml',                       # creación de opcion de impresión de la factura
         'reports/factura_toyota_template.xml',                      # creación de plantilla de la factura QWEB
+        'reports/factura_toyota_reporte_copia.xml',                       # creación de opcion de impresión de la factura
+        'reports/factura_toyota_template_copia.xml',                      # creación de plantilla de la factura QWEB
     ],
     'assets': {
         'web.report_assets_common': [
