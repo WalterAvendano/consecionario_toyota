@@ -146,6 +146,48 @@
               </t>
             </tbody>
           </table>
+          <div style="position: fixed; top: 63%; left: 0; width: 100%; font-size: 8px;">
+            <!-- TABLA DE TÉRMINOS Y CONDICIONES Y TOTALES -->
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; border-spacing: 0;">
+              <tr>
+                <!-- COLUMNA 1: TÉRMINOS Y CONDICIONES (60%) -->
+                <td style="width: 60%; vertical-align: top; padding: 5px; border: none;">
+                  <!-- FILA 1: TÍTULO -->
+                  <div style="color: #CC2229; font-size: 15px; font-weight: bold; text-align: left; margin-bottom: 5px;">
+                Términos y condiciones
+                  </div>
+                  <!-- FILA 2: CONDICIONES DE PAGO -->
+                  <div style="color: #808183; text-align: left; font-size: 11px;">
+                    <span t-esc="doc.invoice_payment_term_id.name or ''"/>
+                  </div>
+                </td>
+
+                <!-- COLUMNA 2: TÍTULOS (20%) -->
+                <td style="width: 20%; vertical-align: top; padding: 5px; border: none;">
+                  <!-- FILA 1: ESPACIO VACÍO PARA ALINEACIÓN -->
+                  <div style="height: 20px; margin-bottom: 5px;"></div>
+                  <!-- FILA 2: SUB TOTAL -->
+                  <div style="font-weight: bold; text-align: left; color: black; margin-bottom: 5px;">Sub Total:</div>
+                  <!-- FILA 3: IMPUESTO IVA -->
+                  <div style="font-weight: bold; text-align: left; color: black; margin-bottom: 5px;">Impuesto IVA:</div>
+                  <!-- FILA 4: TOTAL -->
+                  <div style="font-weight: bold; text-align: left; color: black;">Total:</div>
+                </td>
+
+                <!-- COLUMNA 3: VALORES (20%) -->
+                <td style="width: 20%; vertical-align: top; padding: 5px; border: none;">
+                  <!-- FILA 1: ESPACIO VACÍO PARA ALINEACIÓN -->
+                  <div style="height: 20px; margin-bottom: 5px;"></div>
+                  <!-- FILA 2: SUB TOTAL -->
+                  <div style="text-align: right; margin-bottom: 5px;" t-esc="doc.amount_untaxed"/>
+                  <!-- FILA 3: IMPUESTO IVA -->
+                  <div style="text-align: right; margin-bottom: 5px;" t-esc="doc.amount_tax"/>
+                  <!-- FILA 4: TOTAL -->
+                  <div style="text-align: right; font-weight: bold;" t-esc="doc.amount_total"/>
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <!-- PIE DE PÁGINA - 2 COLUMNAS -->
