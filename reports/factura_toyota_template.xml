@@ -2,11 +2,141 @@
   <template id="report_factura_toyota_template">
     <t t-call="web.html_container">
       <t t-foreach="docs" t-as="doc">
-        <div class="page">
-          <h2>Factura: <span t-esc="doc.name"/></h2>
+        <meta charset="utf-8"/>
+        
+        <!-- ENCABEZADO -->
+        <div class="header" style="position: running(header);">
+          <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse; border-color: transparent;">
+            <tr>
+              <!-- COLUMNA 1: LOGO Y TEXTO (30%) -->
+              <td style="width: 30%; vertical-align: top; padding: 5px;">
+                <div style="text-align: center;">
+                  <img t-att-src="'/web/image?model=res.company&amp;id=%s&amp;field=logo' % doc.company_id.id" 
+                       style="max-height: 70px; max-width: 180px;"/>
+                  <div style="color: black; font-size: 14px; margin-top: 5px;">
+                    Concesionario Toyota, C.A.
+                  </div>
+                </div>
+              </td>
+
+              <!-- COLUMNA 2: ESPACIO EN BLANCO (30%) -->
+              <td style="width: 30%; vertical-align: top; padding: 5px;">
+                <!-- Espacio en blanco -->
+              </td>
+
+              <!-- COLUMNA 3: INFORMACIÓN DE FACTURA (30%) -->
+              <td style="width: 30%; vertical-align: middle; padding: 5px;">
+                <table style="width: 100%; border-collapse: collapse; border: none; border-color: transparent;">
+                  <!-- FILA 1: TÍTULO FACTURA (ocupa 2 columnas) -->
+                  <tr>
+                    <td colspan="2" style="text-align: center; color: #CC2229; font-size: 20px; font-weight: bold; padding-bottom: 10px; border: none;">
+                      Factura
+                    </td>
+                  </tr>
+                  
+                  <!-- FILA 2: FACTURA N° -->
+                  <tr>
+                    <td style="font-weight: bold; padding: 2px 5px; vertical-align: top; border: none;">Factura N°:</td>
+                    <td style="padding: 2px 5px; vertical-align: top; border: none;" t-esc="doc.name"/>
+                  </tr>
+                  
+                  <!-- FILA 3: FECHA DE EMISIÓN -->
+                  <tr>
+                    <td style="font-weight: bold; padding: 2px 5px; vertical-align: top; border: none;">Fecha de Emisión:</td>
+                    <td style="padding: 2px 5px; vertical-align: top; border: none;">
+                      <span t-esc="doc.invoice_date"/>
+                    </td>
+                  </tr>
+                  
+                  <!-- FILA 4: FECHA DE VENCIMIENTO -->
+                  <tr>
+                    <td style="font-weight: bold; padding: 2px 5px; vertical-align: top; border: none;">Fecha de Vencimiento:</td>
+                    <td style="padding: 2px 5px; vertical-align: top; border: none;">
+                      <span t-esc="doc.invoice_date_due"/>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
         </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div style="margin-top: 120px; margin-bottom: 100px;">
+          <h2>Factura: <span t-esc="doc.name"/></h2>
+          <!-- Aquí agregarás el resto del contenido después -->
+        </div>
+
+        <!-- PIE DE PÁGINA - 2 COLUMNAS -->
+        <footer style="position: fixed; bottom: 30mm; width: 100%; background: white; padding: 10px 0;">
+          <!-- TRIPLE LÍNEA DE COLORES -->
+          <div style="width: 80%; margin: 0 auto 8px auto; display: block;">
+            <div style="width: 100%; height: 2px; background: #CC2229; margin: 2px 0; display: block;"></div>
+            <div style="width: 100%; height: 2px; background: #808183; margin: 2px 0; display: block;"></div>
+            <div style="width: 100%; height: 2px; background: #CC2229; margin: 2px 0; display: block;"></div>
+          </div>
+          
+          <!-- CONTENEDOR DE 2 COLUMNAS -->
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <!-- COLUMNA 1: INFORMACIÓN DE CONTACTO -->
+              <td style="width: 50%; vertical-align: top; padding: 5px;">
+                <table style="border-collapse: collapse; border: none;">
+                  <tr>
+                    <td style="vertical-align: top; padding: 2px 5px; font-weight: bold; border: none;">Teléfonos:</td>
+                    <td style="vertical-align: top; padding: 2px 5px; border: none;" t-esc="doc.company_id.phone or ''"/>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top; padding: 2px 5px; font-weight: bold; border: none;">Email:</td>
+                    <td style="vertical-align: top; padding: 2px 5px; border: none;" t-esc="doc.company_id.email or ''"/>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top; padding: 2px 5px; font-weight: bold; border: none;">Dirección:</td>
+                    <td style="vertical-align: top; padding: 2px 5px; border: none;" t-esc="doc.company_id.street or ''"/>
+                  </tr>
+                </table>
+              </td>
+              
+              <!-- COLUMNA 2: TEXTO TOYOTA -->
+              <td style="width: 50%; vertical-align: middle; padding: 5px;">
+                <div style="color: #CC2229; font-size: 14px; font-weight: bold; text-align: center;">
+                  Gracias por preferir Toyota, su mejor opción en vehículos.
+                </div>
+              </td>
+            </tr>
+          </table>
+        </footer>
+
+        <!-- ESTILOS CSS -->
+        <style>
+          @page {
+            margin-top: 100px;
+            margin-bottom: 80px;
+            @top-center {
+              content: element(header);
+            }
+          }
+          
+          .header {
+            position: element(header);
+            top: -100px;
+            width: 100%;
+          }
+          
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+          }
+          
+          /* Asegurar que todos los elementos block ocupen el 100% */
+          div[style*="width: 100%"] {
+            display: block !important;
+            box-sizing: border-box;
+          }
+        </style>
+
       </t>
     </t>
   </template>
 </odoo>
-
