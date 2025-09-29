@@ -17,6 +17,8 @@
         'reports/factura_toyota_template_copia.xml',                # creación de plantilla de la factura QWEB
         'reports/nc_toyota_reporte.xml',                            # creación de opcion de impresión de la factura
         'reports/nc_toyota_template.xml',                           # creación de plantilla de la factura QWEB
+        'reports/nd_toyota_reporte.xml',                            # creación de opcion de impresión de la factura
+        'reports/nd_toyota_template.xml',                           # creación de plantilla de la factura QWEB
     ],
     'assets': {
         'web.report_assets_common': [
